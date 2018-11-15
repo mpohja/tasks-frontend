@@ -3,23 +3,23 @@ import { useQuery } from 'react-apollo-hooks';
 import { loader } from 'graphql.macro';
 import { UnorderedList, ListItem } from 'evergreen-ui';
 
-const ALL_TASKS = loader('../../graphql/queries/allTasks.graphql');
+const USER_TASKS = loader('../../graphql/queries/getTasksByUser.graphql');
 const USER = loader('../../graphql/queries/user.graphql');
 
 const Tasks = () => {
   const {
     data: {
-      user: { role },
+      user: { _id },
     },
   } = useQuery(USER);
-  const { data, error } = useQuery(ALL_TASKS, { variables: { filter: '3' } });
+  const { data, error } = useQuery(USER_TASKS, { variables: { id: _id } });
   if (error) return `Error! ${error.message}`;
 
   return (
     <UnorderedList>
-      {data.allTasks.map(task => (
+      {data.getTasksByUser.map(task => (
         <ListItem key={task._id}>
-          {task.title}, {task.owner.email} {role}
+          {task.title}, {task.status}
         </ListItem>
       ))}
     </UnorderedList>

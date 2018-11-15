@@ -1,0 +1,10 @@
+query getTasksByUser($id: ID!) {
+  getTasksByUser(_id: $id) {
+    title
+    _id
+    status
+    owner {
+      email
+    }
+  }
+}

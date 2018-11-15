@@ -14,6 +14,7 @@ const Login = ({ history: { push } }) => {
     update: (proxy, { data }) => {
       console.info(data);
       proxy.writeData({ data: data.login });
+      window.localStorage.setItem('token', data.login.token);
       push('/');
     },
     variables: { input: { email, password } },
