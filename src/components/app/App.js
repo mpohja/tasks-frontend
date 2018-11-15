@@ -1,21 +1,23 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider as ApolloHooksProvider } from 'react-apollo-hooks';
-import Tasks from './components/tasks/Tasks';
-import { Pane, Heading } from 'evergreen-ui';
+import Root from './Root';
 
 const client = new ApolloClient({
   uri: 'http://localhost:3001/graphql',
+  request: async operation => {
+    const token = await localStorage.getItem('token');
+    operation.setContext({
+      headers: {
+        Authorization: token ? `Bearer ${token}` : '',
+      },
+    });
+  },
 });
 
 const App = () => (
   <ApolloHooksProvider client={client}>
-    <Pane padding={16}>
-      <Heading>Tasks</Heading>
-      <Suspense fallback={<div>Loading...</div>}>
-        <Tasks />
-      </Suspense>
-    </Pane>
+    <Root />
   </ApolloHooksProvider>
 );
 export default App;

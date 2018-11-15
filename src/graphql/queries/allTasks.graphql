@@ -1,0 +1,9 @@
+query getTasks($filter: String) {
+  allTasks(filter: $filter) {
+    title
+    _id
+    owner {
+      email
+    }
+  }
+}

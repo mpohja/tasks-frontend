@@ -1,9 +1,0 @@
-query {
-  allTasks {
-    _id
-    title
-    owner {
-      email
-    }
-  }
-}
