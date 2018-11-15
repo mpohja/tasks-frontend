@@ -9,16 +9,23 @@ const LOGIN = loader('../../graphql/mutations/login.graphql');
 const Login = ({ history: { push } }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [logging, setLogging] = useState(false);
 
-  const login = useMutation(LOGIN, {
+  const useLogin = useMutation(LOGIN, {
     update: (proxy, { data }) => {
-      console.info(data);
       proxy.writeData({ data: data.login });
       window.localStorage.setItem('token', data.login.token);
       push('/');
     },
     variables: { input: { email, password } },
   });
+
+  const login = async () => {
+    setLogging(true);
+    await useLogin();
+    setLogging(false);
+  };
+
   return (
     <Pane height={220} padding={16} display="flex" flexDirection={'column'} alignItems="center" justifyContent="center">
       <Heading>Login</Heading>
@@ -30,7 +37,7 @@ const Login = ({ history: { push } }) => {
           value={password}
           onChange={e => setPassword(e.target.value)}
         />
-        <Button height={32} marginRight={16} intent="success" onClick={login}>
+        <Button height={32} marginRight={16} intent="success" onClick={login} disabled={logging}>
           Login
         </Button>
       </Pane>

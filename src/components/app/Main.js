@@ -1,11 +1,11 @@
 import React, { Suspense } from 'react';
-import { Heading, Pane } from 'evergreen-ui';
+import { Heading, Pane, Spinner } from 'evergreen-ui';
 import Tasks from '../tasks/Tasks';
 
 const Main = () => (
   <Pane padding={16}>
     <Heading>Tasks</Heading>
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<Spinner />}>
       <Tasks />
     </Suspense>
   </Pane>
