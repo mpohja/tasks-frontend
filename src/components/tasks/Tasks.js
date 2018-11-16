@@ -6,6 +6,26 @@ import { UnorderedList, ListItem } from 'evergreen-ui';
 const USER_TASKS = loader('../../graphql/queries/getTasksByUser.graphql');
 const USER = loader('../../graphql/queries/user.graphql');
 
+const getItemProps = status => {
+  switch (status) {
+    case 'NEW':
+      return {
+        icon: 'issue',
+        iconColor: 'danger',
+      };
+    case 'ACCEPTED':
+      return {
+        icon: 'tick-circle',
+        iconColor: 'success',
+      };
+    case 'DONE':
+      return {
+        icon: 'issue-closed',
+        iconColor: 'info',
+      };
+  }
+};
+
 const Tasks = () => {
   const {
     data: {
@@ -18,8 +38,8 @@ const Tasks = () => {
   return (
     <UnorderedList>
       {data.getTasksByUser.map(task => (
-        <ListItem key={task._id}>
-          {task.title}, {task.status}
+        <ListItem key={task._id} {...getItemProps(task.status)}>
+          {task.title}
         </ListItem>
       ))}
     </UnorderedList>
