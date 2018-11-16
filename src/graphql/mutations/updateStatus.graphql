@@ -1,0 +1,7 @@
+mutation updateStatus($id: ID!, $input: StatusInput!) {
+  updateStatus(_id: $id, input: $input) {
+    _id
+    title
+    status
+  }
+}
