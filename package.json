@@ -13,7 +13,7 @@
     "react-apollo-hooks": "^0.1.5",
     "react-dom": "^16.7.0-alpha.0",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "2.1.1"
+    "react-scripts": "5.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -37,7 +37,7 @@
     "@storybook/addon-actions": "^4.0.6",
     "@storybook/addon-links": "^4.0.6",
     "@storybook/addons": "^4.0.6",
-    "@storybook/react": "^4.0.6",
+    "@storybook/react": "^9.1.1",
     "babel-loader": "^8.0.4"
   }
 }
